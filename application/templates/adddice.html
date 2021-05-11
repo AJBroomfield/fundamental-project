@@ -1,0 +1,16 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+<form action='' method='POST'>
+    {{form.hidden_tag()}}
+    {{form.character.label}} {{form.character}}
+    <br>
+    {{form.dice_roll.label}} {{form.dice_roll}}
+    <br>
+    {{form.dice_result.label}} {{form.dice_result}}
+    <br>
+    {{form.submit}} 
+</form>
+
+
+{% endblock body %}
