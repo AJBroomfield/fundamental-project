@@ -1,0 +1,15 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+
+<h2>Dice Rolls </h2>
+
+{% for character in all_characters %}
+    <h3>{{character.name}}</h3>
+    {{all_rolls.query.filter_by(character_id=character.id)}}
+    <br>
+{%endfor%}
+
+
+
+{% endblock body %}
