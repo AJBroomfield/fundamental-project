@@ -1,0 +1,18 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+
+<h3>Name: {{player.name}}<br>
+    Level: {{player.level}}<br>  
+    Race: {{player.race}}<br>
+    Created: {{player.date_created}}</h3>
+
+{% for roll in player_roll %}
+    <b>Dice Rolled:</b>d{{roll.dice_num}} = {{roll.dice_result}}
+    <form action="{{ url_for('deleteroll',id=roll.id)}}"> <input type=submit value="Delete Roll"> </form>
+    <br>
+{%endfor%}
+
+
+
+{% endblock body %}

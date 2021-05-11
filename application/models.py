@@ -7,7 +7,7 @@ class Character(db.Model):
     level = db.Column(db.Integer, nullable=False)
     race = db.Column(db.String(40), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    rolls = db.relationship('DiceRoll', backref='char')
+    rolls = db.relationship('DiceRoll', backref='character')
 
 class DiceRoll(db.Model):
     id = db.Column(db.Integer, primary_key=True)

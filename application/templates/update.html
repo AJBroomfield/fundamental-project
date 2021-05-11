@@ -1,0 +1,17 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+<p>{{player.name}}<br>
+Current Level: {{player.level}}</p>
+
+
+<form action='' method='POST'>
+    {{form.hidden_tag()}}
+    <br> 
+    {{form.level.label}} {{form.level}}
+    <br><br>
+    {{form.submit}} 
+</form>
+
+
+{% endblock body %}

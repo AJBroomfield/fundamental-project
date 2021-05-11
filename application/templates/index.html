@@ -6,15 +6,8 @@
 
 {% for char in all_characters %}
     <h3><b>Level</b> {{char.level}} {{char.name}} </h3>
-
-    {% for roll in all_rolls %}
-
-        {% if roll.character_id == char.id %} 
-        
-        Dice rolled: d{{roll.dice_num}} result = {{roll.dice_result}} 
-        <br>
-        {%endif%}
-    {%endfor%}
+    <form action="{{ url_for('summary',id=char.id)}}"> <input type=submit value="Summary"> </form>
+    <form action="{{ url_for('update', id=char.id) }}"> <input type=submit value="Update"> </form>
     <br>
 {%endfor%}
 

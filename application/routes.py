@@ -1,7 +1,7 @@
 from application import app, db
 from application.models import Character, DiceRoll
 from flask import render_template, request, redirect, url_for
-from application.forms import CharacterForm, DiceRollForm
+from application.forms import CharacterForm, DiceRollForm, UpdateCharacterForm
 
 @app.route('/')
 @app.route('/home')
@@ -39,34 +39,27 @@ def adddice():
             return redirect(url_for('home'))
     return render_template("adddice.html", title='Add a dice roll', form=form)
 
-# @app.route('/update/<int:id>', methods=["GET","POST"])
-# def update(id):
-#     task = Tasks.query.filter_by(id=id).first()
-#     form = TaskForm()
-#     if request.method == "POST":
-#         task.desc = form.desc.data
-#         db.session.commit()
-#         return redirect(url_for('home'))
-#     return render_template("edit.html", form=form, title="Update Task", task=task)
+@app.route('/summary/<int:id>', methods=["GET","POST"])
+def summary(id):
+    player = Character.query.filter_by(id=id).first()
+    player_roll = DiceRoll.query.filter_by(character_id=id)    
+    return render_template("summary.html", title="Summary Page", player=player, player_roll=player_roll)
 
-# @app.route('/delete/<int:id>', methods=["GET","POST"])
-# def delete(id):
-#     task = Tasks.query.filter_by(id=id).first()
-#     db.session.delete(task)
-#     db.session.commit()
-#     return redirect(url_for('home'))
-    
-# @app.route('/complete/<int:id>', methods=["GET","POST"])
-# def complete(id):
-#     task = Tasks.query.filter_by(id=id).first()
-#     task.status = True
-#     db.session.commit()
-#     return redirect(url_for('home'))
+@app.route('/delete/<int:id>', methods=["GET","POST"])
+def deleteroll(id):
+    roll = DiceRoll.query.filter_by(id=id).first()
+    db.session.delete(roll)
+    db.session.commit()
+    return redirect(url_for('home'))
 
-# @app.route('/incomplete/<int:id>')
-# def incomplete(id):
-#     task = Tasks.query.filter_by(id=id).first()
-#     task.status = False
-#     db.session.commit()
-#     return redirect(url_for('home'))
+@app.route('/update/<int:id>', methods=["GET","POST"])
+def update(id):
+    player = Character.query.filter_by(id=id).first()
+    form = UpdateCharacterForm()
+    if request.method == "POST":
+        player.level = form.level.data
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template("update.html", form=form, title="Change Level", player=player)    
+
 

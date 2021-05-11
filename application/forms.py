@@ -15,4 +15,7 @@ class DiceRollForm(FlaskForm):
     dice_roll = SelectField('Dice Rolled', choices=[(4, 'd4'),(6,'d6'),(8,'d8'),(10,'d10'),(20,'d20')])
     dice_result = IntegerField('Dice Result')
     submit = SubmitField('Add Roll')
+
+class UpdateCharacterForm(CharacterForm):
+    submit = SubmitField('Update Character')
     
