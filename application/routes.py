@@ -50,7 +50,7 @@ def deleteroll(id):
     roll = DiceRoll.query.filter_by(id=id).first()
     db.session.delete(roll)
     db.session.commit()
-    return redirect(url_for('home'))
+    return redirect(url_for('summary', id=id))
 
 @app.route('/update/<int:id>', methods=["GET","POST"])
 def update(id):
