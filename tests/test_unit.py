@@ -48,7 +48,6 @@ class TestViews(TestBase):
         response = self.client.get(url_for('update',id=1),follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
-
 class TestRead(TestBase):
     def test_read_task(self):
         response = self.client.get(url_for('home'))
@@ -66,14 +65,15 @@ class TestAdd(TestBase):
         self.assertIn(b'Luke Warm',response.data)
         self.assertIn(b'5' ,response.data)
         self.assertIn(b'Mountain Dwarf',response.data)
+    
     def test_add_roll(self):
         response = self.client.post(
             url_for('adddice'),
-            data = dict(character_id=1, dice_num=20, dice_result=20),
+            data = dict(character_id=1, dice_roll=8, dice_result=7),
             follow_redirects=True
         )
-        self.assertIn(b'd20',response.data)
-        self.assertIn(b'20',response.data)
+        self.assertIn(b'd8',response.data)
+        self.assertIn(b'7',response.data)
 
 class TestUpdate(TestBase):
     def test_update_level(self):
