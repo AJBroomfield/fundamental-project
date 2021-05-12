@@ -5,9 +5,10 @@
 <h2>Dice Rolls</h2>
 
 {% for char in all_characters %}
-    <h3><b>Level</b> {{char.level}} {{char.name}} </h3>
-    <form action="{{ url_for('summary',id=char.id)}}"> <input type=submit value="Summary"> </form>
-    <form action="{{ url_for('update', id=char.id) }}"> <input type=submit value="Update"> </form>
+    <b>Name:</b> {{char.name}}  <br>           
+    <b>Level:</b> {{char.level}} <br>
+    <b>Race:</b> {{char.race}}
+    <form action="{{ url_for('summary',id=char.id)}}"> <input type=submit value="Summary"></form><form action="{{ url_for('update', id=char.id) }}"> <input type=submit value="Update"> </form>
     <br>
 {%endfor%}
 
