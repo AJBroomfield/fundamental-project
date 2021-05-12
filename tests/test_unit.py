@@ -1,9 +1,49 @@
 import unittest
 from flask import url_for
-from flask_testing import TestCase
+from flask_testing import TestCase, LiveServerTestCase
+from selenium import webdriver
+from urllib.request import urlopen
 
 from application import app, db
 from application.models import Character, DiceRoll
+
+class SeleniBase(LiveServerTestCase):
+    TEST_PORT = 5050 
+    def create_app(self):
+        app.config.update(
+            SQLALCHEMY_DATABASE_URI="sqlite:///tester.db",
+            LIVESERVER_PORT=self.TEST_PORT,
+            DEBUG=True,
+            TESTING=True
+        )
+        return app
+    def setUp(self):
+        chrome_options = webdriver.chrome.options.Options()
+        chrome_options.add_argument('--headless')
+        self.driver = webdriver.Chrome(options=chrome_options)
+        db.create_all() 
+        self.driver.get(f'http://localhost:{self.TEST_PORT}')
+    def tearDown(self):
+        self.driver.quit()
+        db.drop_all()
+    def test_server_is_up_and_running(self):
+        response = urlopen(f'http://localhost:{self.TEST_PORT}')
+        self.assertEqual(response.code, 200)
+
+class SeleniAdd(SeleniBase):
+    def test_create(self):
+        
+        self.driver.find_element_by_xpath('/html/body/h2[1]/a[2]').click()
+        self.driver.find_element_by_xpath('//*[@id="name"]').send_keys('Chang Edlater')
+        self.driver.find_element_by_xpath('//*[@id="level"]').send_keys('1')
+        self.driver.find_element_by_xpath('//*[@id="race"]').send_keys('Human')
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+
+        self.assertIn(url_for('home'), self.driver.current_url)
+        player_details = self.driver.find_element_by_xpath('/html/body/p[1]').text
+        self.assertIn('Chang Edlater',player_details)
+        self.assertIn('Human',player_details)
+        self.assertIn('1',player_details)
 
 class TestBase(TestCase):
     def create_app(self):

@@ -9,6 +9,27 @@
     <br>
     {{form.race.label}} {{form.race}}
     <br>
+    {% if form.name.errors %}
+        <div class='Error'>
+            {% for error in form.name.errors %}
+                <span><i>{{error}}</i></span>
+            {%endfor%}
+        </div>
+    {%endif%}
+    {% if form.level.errors %}
+        <div class='Error'>
+            {% for error in form.level.errors %}
+                <span><i>{{error}}</i></span>
+            {%endfor%}
+        </div>
+    {%endif%}
+    {% if form.race.errors %}
+        <div class='Error'>
+            {% for error in form.race.errors %}
+                <span><i>{{error}}</i></span>
+            {%endfor%}
+        </div>
+    {%endif%}
     {{form.submit}} 
 </form>
 
