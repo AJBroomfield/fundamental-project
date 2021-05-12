@@ -45,7 +45,7 @@ def summary(id):
     player_roll = DiceRoll.query.filter_by(character_id=id)    
     return render_template("summary.html", title="Summary Page", player=player, player_roll=player_roll)
 
-@app.route('/deleteroll/<int:id>', methods=["GET","POST"])
+@app.route('/delete/<int:id>', methods=["GET","POST"])
 def deleteroll(id):
     roll = DiceRoll.query.filter_by(id=id).first()
     db.session.delete(roll)

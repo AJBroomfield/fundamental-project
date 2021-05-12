@@ -5,11 +5,16 @@
 <h2>Dice Rolls</h2>
 
 {% for char in all_characters %}
-    <b>Name:</b> {{char.name}}  <br>           
+    <p><b>Name:</b> {{char.name}}  <br>           
     <b>Level:</b> {{char.level}} <br>
-    <b>Race:</b> {{char.race}}
+    <b>Race:</b> {{char.race}} <br>
+    {% for roll in all_rolls%}
+        {% if roll.character_id == char.id %}
+        d{{roll.dice_num}}={{roll.dice_result}}
+        {%endif%}
+    {%endfor%}
     <form action="{{ url_for('summary',id=char.id)}}"> <input type=submit value="Summary"></form><form action="{{ url_for('update', id=char.id) }}"> <input type=submit value="Update"> </form>
-    <br>
+    </p>
 {%endfor%}
 
 

@@ -9,6 +9,15 @@
     <br>
     {{form.dice_result.label}} {{form.dice_result}}
     <br>
+    <br>
+    {% if form.dice_result.errors %}
+        <div class='Error'>
+            {% for error in form.dice_result.errors %}
+                <span><i>{{error}}</i></span>
+            {%endfor%}
+        </div>
+    {%endif%}
+    <br>
     {{form.submit}} 
 </form>
 
