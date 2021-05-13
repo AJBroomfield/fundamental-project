@@ -36,7 +36,7 @@ def adddice():
 
             db.session.add(new_roll)
             db.session.commit()
-            return redirect(url_for('home'))
+            return redirect(url_for('adddice'))
     return render_template("adddice.html", title='Add a dice roll', form=form)
 
 @app.route('/summary/<int:id>', methods=["GET","POST"])
@@ -45,10 +45,21 @@ def summary(id):
     player_roll = DiceRoll.query.filter_by(character_id=id)    
     return render_template("summary.html", title="Summary Page", player=player, player_roll=player_roll)
 
-@app.route('/delete/<int:id>', methods=["GET","POST"])
+@app.route('/deleteroll/<int:id>', methods=["GET","POST"])
 def deleteroll(id):
     roll = DiceRoll.query.filter_by(id=id).first()
     db.session.delete(roll)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/deletechar/<int:id>', methods=["GET","POST"])
+def deletechar(id):
+    count = DiceRoll.query.filter_by(character_id=id).count()
+    for i in range(1,count+1):
+        roll=DiceRoll.query.filter_by(character_id=id).first()
+        db.session.delete(roll)
+    player = Character.query.filter_by(id=id).first()
+    db.session.delete(player)
     db.session.commit()
     return redirect(url_for('home'))
 

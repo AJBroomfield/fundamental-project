@@ -3,19 +3,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, SelectField
 from wtforms.validators import DataRequired, NumberRange, ValidationError, Length
 
-
-class CheckLevelValue:
-    def __init__(self, message="Value isn't an integer"):
-        self.message = message
-    def __call__(self, form, field):
-        if not type(field.data) == int :
-            raise ValidationError(self.message)
-
 class CharacterForm(FlaskForm):
     name = StringField('Character Name', validators=[
         DataRequired(), Length(min=2, max=40, message='Enter a name between %(min)d and %(max)d characters long')])
-    level = IntegerField('Level', validators=[DataRequired(),
-        CheckLevelValue()])
+    level = IntegerField('Level', default=1)
     race = StringField('Character Race', validators=[
         DataRequired(), Length(min=2, max=40, message='Enter a race between %(min)d and %(max)d characters long')])
     submit = SubmitField('Add Character')
@@ -26,6 +17,8 @@ class CheckDiceRoll:
     def __call__(self, form, field):
         if not (field.data <= int(form.dice_roll.data)):
             raise ValidationError(self.message)
+        elif not (field.data > 1):
+            raise ValidationError("Enter a number greater than zero")
 
 
 class DiceRollForm(FlaskForm):

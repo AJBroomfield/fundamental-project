@@ -6,7 +6,7 @@
     Level: {{player.level}}<br>  
     Race: {{player.race}}<br>
     Created: {{player.date_created}}</h3>
-
+    <form action="{{ url_for('deletechar',id=player.id)}}"> <input type=submit value="Delete Character"> </form>
 {% for roll in player_roll %}
     <b>Dice Rolled:</b>d{{roll.dice_num}} = {{roll.dice_result}}
     <form action="{{ url_for('deleteroll',id=roll.id)}}"> <input type=submit value="Delete Roll"> </form>
