@@ -85,6 +85,14 @@ class TestAdd(TestBase):
         )
         self.assertIn(b'Result is too large',response.data)
     
+    def test_add_roll_failneg(self):
+        response = self.client.post(
+            url_for('adddice'),
+            data = dict(character=1, dice_roll=8, dice_result=-1),
+            follow_redirects=True
+        )
+        self.assertIn(b'Enter a number greater than zero',response.data)
+    
 
 class TestUpdate(TestBase):
     def test_update_level(self):
@@ -104,3 +112,10 @@ class TestDelete(TestBase):
             follow_redirects=True
         )
         self.assertNotIn(b'18',response.data)
+    
+    def test_delete_roll(self):
+        response = self.client.get(
+            url_for('deletechar',id=1),
+            follow_redirects=True
+        )
+        self.assertNotIn(b'Luke Warm',response.data)
