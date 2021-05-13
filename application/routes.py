@@ -37,6 +37,7 @@ def adddice():
             db.session.add(new_roll)
             db.session.commit()
             return redirect(url_for('adddice'))
+
     return render_template("adddice.html", title='Add a dice roll', form=form)
 
 @app.route('/summary/<int:id>', methods=["GET","POST"])
