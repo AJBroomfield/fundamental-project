@@ -33,19 +33,19 @@ class TestViews(TestBase):
     def test_read_task(self):
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code,200)
-    def test_create_get(self):
+    def test_adddice_get(self):
         response = self.client.get(url_for('adddice'))
         self.assertEqual(response.status_code, 200)
-    def test_update_get(self):
+    def test_addchar_get(self):
         response = self.client.get(url_for('addchar'))
         self.assertEqual(response.status_code, 200)
-    def test_complete_get(self):
+    def test_summary_get(self):
         response = self.client.get(url_for('summary',id=1),follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-    def test_incomplete_get(self):
+    def test_deleteroll_get(self):
         response = self.client.get(url_for('deleteroll',id=1),follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-    def test_delete_get(self):
+    def test_update_get(self):
         response = self.client.get(url_for('update',id=1),follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
