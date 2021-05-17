@@ -1,6 +1,6 @@
 # DnD Dice Storage
 ## Introduction
-The overall objective of this project is to create a CRUD application with utilisation of supporting tools, methodologies ad technologies and technologies that encapsulate all core modules covered during training.  
+The overall objective of this project is to create a CRUD application with utilisation of supporting tools, methodologies and technologies that encapsulate all core modules covered during training.  
 The application must meet the following requirements:
 * Trello Board
 * Relational Database with ERD
@@ -32,11 +32,11 @@ I decided to make and application for DnD players to store simple character stat
 
 ![ERD_V1](https://i.imgur.com/xhW3PyL.jpg)
 
-The image above shows the entity relationship diagram (ERD) initial database structure which included three tables and allowed users to login to the application and view their own data. However, this feature was not required for the MVP (Minimal Viable Product) so was not included in the first scrum. 
+The image above shows the entity relationship diagram (ERD) of the initial database structure which included three tables and allowed users to login to the application and view their own data. However, a user table was not required for the MVP (Minimal Viable Product) so was not included in the first scrum. 
 
 ![ERD_V2](https://i.imgur.com/8llbl6z.jpg)
 
-The database structure implemented in the first scrum is shown by the ERD directly above, it follows a similar structure to my initial design but removes user table. This design allows users to input their own simple character sheet and then assign dice rolls to that character.  
+The database structure implemented in the first scrum is shown by the ERD directly above, it follows a similar structure to my initial design but removes user table. This one-to-many relationship allows users to input their own simple character sheet and then assign dice rolls to that character.  
 
 ## Continous Integration
 
