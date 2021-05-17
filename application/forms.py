@@ -17,7 +17,7 @@ class CheckDiceRoll:
     def __call__(self, form, field):
         if not (field.data <= int(form.dice_roll.data)):
             raise ValidationError(self.message)
-        elif not (field.data > 1):
+        elif not (field.data >= 1):
             raise ValidationError("Enter a number greater than zero")
 
 
