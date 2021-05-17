@@ -7,6 +7,7 @@ from urllib.request import urlopen
 from application import app, db
 from application.models import Character, DiceRoll
 
+#
 class SeleniBase(LiveServerTestCase):
     TEST_PORT = 5050 
     def create_app(self):
