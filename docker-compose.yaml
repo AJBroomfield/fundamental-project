@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  fundamental-project:
+    container_name: "fundamental-project"
+    image: "abroomfield/fundamental-project:latest"
+    build: .
+    environment:
+      DATABASE_URI: sqlite:///test.db
+      SECRET_KEY: ${SECRET_KEY}
+    ports:
+    - target: 5000
+      published: 80
